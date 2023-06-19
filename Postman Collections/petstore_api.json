@@ -1,0 +1,394 @@
+{
+	"info": {
+		"_postman_id": "eeb3063f-6586-4718-a160-3a277516bd08",
+		"name": "pet store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "pet",
+			"item": [
+				{
+					"name": "pit status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "be73b533-0cff-4584-b622-319b9d74410f",
+								"exec": [
+									"pm.test(\"validate finding pets by status successfuelly\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 3000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"check stauts have available\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"available\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "6aa8cc8b-6109-475b-9d3a-acf0eb79a863",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/pet/findByStatus?status=available&status=pending&status=sold",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"pet",
+								"findByStatus"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "available"
+								},
+								{
+									"key": "status",
+									"value": "pending"
+								},
+								{
+									"key": "status",
+									"value": "sold"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add new pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "576fb59c-c29d-4567-b643-0e8270768f1c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 3000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "476f0b52-02a5-4cb0-b554-259226e45320",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 5000,\r\n  \"category\": {\r\n    \"id\": 5,\r\n    \"name\": \"dogs\"\r\n  },\r\n  \"name\": \"jonny\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/pet"
+					},
+					"response": []
+				},
+				{
+					"name": "update pet",
+					"_postman_id": "9e0d916e-cd6b-473f-b0ed-0c024ce80daa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 5000,\r\n  \"category\": {\r\n    \"id\": 5,\r\n    \"name\": \"string\"\r\n  },\r\n  \"name\": \"max\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/pet"
+					},
+					"response": []
+				},
+				{
+					"name": "find pet by id",
+					"_postman_id": "4081f907-05d1-4adf-be3d-b480b0bad44e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseurl}}/pet/917"
+					},
+					"response": []
+				},
+				{
+					"name": "delete pet by id",
+					"_postman_id": "ef34cc75-150b-40db-bef0-018ac4037715",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {
+								"key": "auth_key",
+								"value": "special-key"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "{{baseurl}}/pet/917"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "304636b2-f2ab-4d42-9e20-4462f3e15ecf"
+		},
+		{
+			"name": "store",
+			"item": [
+				{
+					"name": "find purchase by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "783c4637-894d-412a-a184-f7fdf8b50aed",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "941ebc17-95b1-4565-9f0e-e6a34ef441eb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseurl}}/store/order/2"
+					},
+					"response": []
+				},
+				{
+					"name": "find the pet inveintory by status",
+					"_postman_id": "054a3b15-da8c-44a0-b074-2bac87e55ea5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseurl}}/store/inventory"
+					},
+					"response": []
+				},
+				{
+					"name": "place pet order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "873b85dd-6f75-43d3-a3b4-7c4b320786a0",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "25419c28-c137-4699-98fc-1148d8a80f6a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 101,\r\n  \"petId\": 201,\r\n  \"quantity\": 50,\r\n  \"shipDate\": \"2023-04-24T13:36:35.759Z\",\r\n  \"status\": \"placed\",\r\n  \"complete\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/store/order"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "ce039f5e-6100-4c61-9add-80e30008268d"
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "create new user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "567f281a-1a53-4262-93a2-e923bda29a38",
+								"exec": [
+									"pm.test(\"create new user successful\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(3000);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "e8996ad7-a917-4e7a-9d19-76589a5bfef5",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"id\": 300,\r\n    \"username\": \"hala1\",\r\n    \"firstName\": \"hala\",\r\n    \"lastName\": \"mohamed\",\r\n    \"email\": \"h@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"phone\": \"01000096711\",\r\n    \"userStatus\": 0\r\n  }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/user/createWithList"
+					},
+					"response": []
+				},
+				{
+					"name": "find user by username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4c7e0df8-e546-4e6b-bb74-835562efa98b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "ba5ace0c-f55a-46aa-8642-63040fbe8818",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseurl}}/user/hala1"
+					},
+					"response": []
+				},
+				{
+					"name": "login user",
+					"_postman_id": "8eead85c-a322-4bfd-9389-7645dca49f70",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/user/login?username=hala1&password=123456",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"user",
+								"login"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "hala1"
+								},
+								{
+									"key": "password",
+									"value": "123456"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"_postman_id": "1f6f3d89-cfe2-4971-888f-029663f7d5dc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 300,\r\n  \"username\": \"hala1\",\r\n  \"firstName\": \"gogo\",\r\n  \"lastName\": \"mohamed\",\r\n  \"email\": \"z@gmail.com\",\r\n  \"password\": \"2468\",\r\n  \"phone\": \"0111111111\",\r\n  \"userStatus\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/user/hala1"
+					},
+					"response": []
+				},
+				{
+					"name": "user logout",
+					"_postman_id": "1bb3cf24-0a0a-49ea-9745-54f71efd5b3c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseurl}}/user/logout"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "4fe7b2f0-6338-48e2-a08a-9ce692b703d2"
+		}
+	]
+}
