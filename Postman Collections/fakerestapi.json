@@ -1,0 +1,768 @@
+{
+	"info": {
+		"_postman_id": "deaf834a-d753-4309-8f98-37039198d130",
+		"name": "FakeRESTApi.Web V1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Activities",
+			"item": [
+				{
+					"name": "get activities",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "11b1cdd9-0fd4-4c89-8136-9a7909b4aad8",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "f881cb8b-9c78-4d19-9411-b50887f5fb95",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{fakeapi_url}}/api/v1/Activities"
+					},
+					"response": []
+				},
+				{
+					"name": "create  new activities",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "64862523-b7e1-48b9-9a81-3d69dd1dcb0b",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"verify title\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.title).to.eql(\"horor\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\",\"application/json; charset=utf-8; v=1.0\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(true);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "b1bcb29f-5e6b-40f9-9798-ccd08d282b53",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 100,\r\n  \"title\": \"horor\",\r\n  \"dueDate\": \"2023-05-25T12:46:55.718Z\",\r\n  \"completed\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/Activities"
+					},
+					"response": []
+				},
+				{
+					"name": "get activity by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e9258f39-6507-42a3-b4d4-33b5ba2e54cf",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"check date\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.dueDate).to.eql(\"2023-05-29\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Body contain date\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"2023-05-29\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"check completed is boolean\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.completed).to.eql(true);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"h\",function(){\r",
+									"        var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.completed).to.be.true;\r",
+									"\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"assert completed is false\",function(){\r",
+									"            var jsonData = pm.response.json();\r",
+									"assert.isTrue(jsonData.completed);\r",
+									"\r",
+									"});\r",
+									"\r",
+									"const expectedjsonschema = \r",
+									"{\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"id\": {\r",
+									"      \"type\": \"integer\"\r",
+									"    },\r",
+									"    \"title\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"dueDate\": {\r",
+									"      \"type\": \"string\"\r",
+									"    },\r",
+									"    \"completed\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"id\",\r",
+									"    \"title\",\r",
+									"    \"dueDate\",\r",
+									"    \"completed\"\r",
+									"  ]\r",
+									"};\r",
+									"\r",
+									"pm.test(\"verify json schema\",function(){\r",
+									"pm.response.to.have.jsonSchema(expectedjsonschema)\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "1a5e55f4-af3b-4966-996d-77af181be825",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 100,\r\n  \"title\": \"horor\",\r\n  \"dueDate\": \"2023-05-25T12:46:55.718Z\",\r\n  \"completed\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/Activities/30"
+					},
+					"response": []
+				},
+				{
+					"name": "update in activity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "dffab7fd-501d-4cce-b7fc-fecc96d34e85",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Your test name\", function () {\r",
+									"    pm.expect(jsonData.title).to.eql(\"horor movie\");\r",
+									"    pm.expect(jsonData.completed).to.eql(true);\r",
+									"    });\r",
+									"\r",
+									"\r",
+									"pm.test(\"expect completed is false\",function(){\r",
+									"    pm.expect(jsonData.completed).to.be.false;\r",
+									"\r",
+									"});\r",
+									"\r",
+									"pm.test(\"assert completed is false\",function(){\r",
+									"pm.assert.isFalse(jsonData.completed, 'no tea yet? hmm...');\r",
+									"\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "6a4dcbf8-33a6-4ebf-ba98-46d74c83cfca",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n        \"id\": 30,\r\n        \"title\": \"horor movie\",\r\n        \"dueDate\": \"2023-05-26T18:53:50.8415858+00:00\",\r\n        \"completed\": false\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/Activities/30"
+					},
+					"response": []
+				},
+				{
+					"name": "delete in activity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3adba63a-a94f-4bed-b03d-5610c2efbf50",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "3dd07ded-40b1-499d-be9b-5c232155b6b9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/Activities/30"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "87e2cfea-b6c3-4df1-a4ab-0503f1bcff18"
+		},
+		{
+			"name": "author",
+			"item": [
+				{
+					"name": "get authors",
+					"_postman_id": "68ea9035-d2cf-4901-8415-772dcf2d88d6",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{fakeapi_url}}/api/v1/Authors"
+					},
+					"response": []
+				},
+				{
+					"name": "create new author",
+					"_postman_id": "16498372-8d15-42d9-9fde-04818135262c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 600,\r\n  \"idBook\": 300,\r\n  \"firstName\": \"hala\",\r\n  \"lastName\": \"mostafa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/Authors"
+					},
+					"response": []
+				},
+				{
+					"name": "get book by id",
+					"_postman_id": "ce551367-82e0-4627-9c79-f9f3801fe092",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 600,\r\n  \"idBook\": 300,\r\n  \"firstName\": \"hala\",\r\n  \"lastName\": \"mostafa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/Authors/authors/books/2022"
+					},
+					"response": []
+				},
+				{
+					"name": "get authors by id",
+					"_postman_id": "b3ca9f95-31c6-49ce-b7c3-31da36a49e40",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 600,\r\n  \"idBook\": 300,\r\n  \"firstName\": \"hala\",\r\n  \"lastName\": \"mostafa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/Authors/2020"
+					},
+					"response": []
+				},
+				{
+					"name": "update by author id",
+					"_postman_id": "f3b562fb-801f-477c-8778-2a69228cae26",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 2020,\r\n  \"idBook\": 300,\r\n  \"firstName\": \"gogo\",\r\n  \"lastName\": \"mostafa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/Authors/600"
+					},
+					"response": []
+				},
+				{
+					"name": "update by author id Copy",
+					"_postman_id": "25134501-756c-4baf-aa7f-cb8e0e5a6e36",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 600,\r\n  \"idBook\": 300,\r\n  \"firstName\": \"gogo\",\r\n  \"lastName\": \"mostafa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/Authors/2020"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "a6b0f23f-17c7-4a9b-a869-ba0efddf3aa9"
+		},
+		{
+			"name": "books",
+			"item": [
+				{
+					"name": "get all books",
+					"_postman_id": "961f79ad-e80a-4b35-9bb5-9cbb924fd45d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{fakeapi_url}}/api/v1/Books"
+					},
+					"response": []
+				},
+				{
+					"name": "create new book",
+					"_postman_id": "b24ba21b-a86a-41a7-8af1-bda716ddf911",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 2020,\r\n  \"title\": \"hala\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": 300,\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"2023-05-25T14:24:19.019Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/Books"
+					},
+					"response": []
+				},
+				{
+					"name": "get book by id",
+					"_postman_id": "2297a199-7c5a-451d-835f-122d30dc7934",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 2020,\r\n  \"title\": \"hala\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": 300,\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"2023-05-25T14:24:19.019Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/Books/3"
+					},
+					"response": []
+				},
+				{
+					"name": "update book by id",
+					"_postman_id": "c909776c-6cf4-46b8-b644-2c6474100bc8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 3,\r\n    \"title\": \"hala\",\r\n    \"description\": \"Lorem lorem lorem. Lorem lorem lorem. Lorem lorem lorem.\\n\",\r\n    \"pageCount\": 300,\r\n    \"excerpt\": \"Lorem lorem lorem. Lorem lorem lorem. Lorem lorem lorem.\\nLorem lorem lorem. Lorem lorem lorem. Lorem lorem lorem.\\nLorem lorem lorem. Lorem lorem lorem. Lorem lorem lorem.\\nLorem lorem lorem. Lorem lorem lorem. Lorem lorem lorem.\\nLorem lorem lorem. Lorem lorem lorem. Lorem lorem lorem.\\n\",\r\n    \"publishDate\": \"2023-05-22T14:35:13.7596109+00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/Books/3"
+					},
+					"response": []
+				},
+				{
+					"name": "delete book by id",
+					"_postman_id": "c2ca0622-0c58-4da9-b2ca-8787f45548d1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 3,\r\n    \"title\": \"hala\",\r\n    \"description\": \"Lorem lorem lorem. Lorem lorem lorem. Lorem lorem lorem.\\n\",\r\n    \"pageCount\": 300,\r\n    \"excerpt\": \"Lorem lorem lorem. Lorem lorem lorem. Lorem lorem lorem.\\nLorem lorem lorem. Lorem lorem lorem. Lorem lorem lorem.\\nLorem lorem lorem. Lorem lorem lorem. Lorem lorem lorem.\\nLorem lorem lorem. Lorem lorem lorem. Lorem lorem lorem.\\nLorem lorem lorem. Lorem lorem lorem. Lorem lorem lorem.\\n\",\r\n    \"publishDate\": \"2023-05-22T14:35:13.7596109+00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/Books/3"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "c8b7a00c-f8d5-44a3-a4b0-7e950e753cf2"
+		},
+		{
+			"name": "cover photo",
+			"item": [
+				{
+					"name": "get all cover photos",
+					"_postman_id": "a5209144-d3af-4d96-854f-0ee0fc01e932",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{fakeapi_url}}/api/v1/CoverPhotos"
+					},
+					"response": []
+				},
+				{
+					"name": "create cover photo",
+					"_postman_id": "1eb43616-9f60-4454-a44f-d10e53bb5044",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 2020,\r\n  \"idBook\": 20202020,\r\n  \"url\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/CoverPhotos"
+					},
+					"response": []
+				},
+				{
+					"name": "get cover photo by book id",
+					"_postman_id": "ea5399d1-f421-4ef3-b444-c91287cbe904",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 2020,\r\n  \"idBook\": 20202020,\r\n  \"url\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/CoverPhotos/books/covers/10"
+					},
+					"response": []
+				},
+				{
+					"name": "get cover photo by id",
+					"_postman_id": "4860b2a9-b9c6-49b7-9699-bf6f0f50b4d4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 2020,\r\n  \"idBook\": 20202020,\r\n  \"url\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/CoverPhotos/22"
+					},
+					"response": []
+				},
+				{
+					"name": "update cover photo by id",
+					"_postman_id": "e5aa08e5-4383-4208-ad75-0f2f94b91bb1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 21,\r\n  \"idBook\": 5,\r\n  \"url\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/CoverPhotos/21"
+					},
+					"response": []
+				},
+				{
+					"name": "delete cover photo by id",
+					"_postman_id": "98c79100-ecff-4017-af70-37c954de6999",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 21,\r\n  \"idBook\": 5,\r\n  \"url\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/CoverPhotos/21"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "a2bca259-2a25-4bf0-a50b-cb685a9d597f"
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "get all user",
+					"_postman_id": "be604015-09f9-462d-98ea-fce9ef504fe3",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{fakeapi_url}}/api/v1/Users"
+					},
+					"response": []
+				},
+				{
+					"name": "get all user Copy",
+					"_postman_id": "345d56ba-7fcb-4bdf-8f20-37014a80cf7d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 1000,\r\n  \"userName\": \"mohamed\",\r\n  \"password\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/Users"
+					},
+					"response": []
+				},
+				{
+					"name": "get  user  by id",
+					"_postman_id": "d7e53e76-02c6-4d36-b3ea-1dc253217c51",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 1000,\r\n  \"userName\": \"mohamed\",\r\n  \"password\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/Users/1"
+					},
+					"response": []
+				},
+				{
+					"name": "update  user  by id",
+					"_postman_id": "03b66eeb-9dfc-42ea-b8a2-6430c44dec2a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"userName\": \"User 555\",\r\n    \"password\": \"Password1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/Users/1"
+					},
+					"response": []
+				},
+				{
+					"name": "delete  user  by id Copy",
+					"_postman_id": "1adab7b8-0599-4398-b6ba-9af81343ad6b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{fakeapi_url}}/api/v1/Users/1"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "aa1f5a3c-dff0-4b30-b36e-9c1f748d2f57"
+		}
+	]
+}
